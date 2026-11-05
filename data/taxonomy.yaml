@@ -1,0 +1,24 @@
+# Reason codes. Each needs a phrase-bank entry in all 7 languages.
+version: 1
+codes:
+  - {code: URGENCY,                name: Pressure language,                 group: text, priority: false}
+  - {code: KYC_BANK_BLOCK,         name: Fake bank / KYC,                   group: text, priority: false}
+  - {code: OTP_REQUEST,            name: OTP / PIN / CVV theft,             group: text, priority: false}
+  - {code: UPI_COLLECT,            name: UPI collect / refund trick,        group: text, priority: false}
+  - {code: LOTTERY_PRIZE,          name: Lottery / prize,                   group: text, priority: false}
+  - {code: ELECTRICITY_DISCONNECT, name: Fake electricity bill,             group: text, priority: false}
+  - {code: COURIER_CUSTOMS,        name: Fake courier / customs,            group: text, priority: false}
+  - {code: DIGITAL_ARREST,         name: Impersonating police / agencies,   group: text, priority: false}
+  - {code: SIM_BLOCK,              name: Fake telecom / SIM block,          group: text, priority: false}
+  - {code: FAKE_CHALLAN,           name: Fake e-challan / RTO,              group: text, priority: true}
+  - {code: JOB_TASK_SCAM,          name: Part-time job / task scam,         group: text, priority: false}
+  - {code: LOAN_APP,               name: Predatory loan app,                group: text, priority: false}
+  - {code: GOVT_SCHEME,            name: Fake government scheme,            group: text, priority: false}
+  - {code: INVESTMENT_CRYPTO,      name: Investment / crypto,               group: text, priority: false}
+  - {code: MALICIOUS_APK,          name: APK file or install link,          group: text, priority: true}
+  - {code: LOOKALIKE_DOMAIN,       name: Brand impersonation URL,           group: url,  priority: false}
+  - {code: SHORTENED_URL,          name: Shortened URL,                     group: url,  priority: false}
+  - {code: SUSPICIOUS_TLD_OR_IP,   name: Risky URL structure,               group: url,  priority: false}
+  - {code: UNKNOWN_SENDER_LINK,    name: Link from unfamiliar sender,       group: rule, priority: false}
+  - {code: GENERIC_SUSPICIOUS,     name: Flagged without a clear code,      group: text, priority: false}
+languages: [en, hi, hinglish, mr, gu, bn, or]

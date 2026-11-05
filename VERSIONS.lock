@@ -1,0 +1,16 @@
+executorch_python:
+executorch_android_aar:   # must equal executorch_python
+python:
+torch:
+llama_model_id:
+llama_quantization:
+tokenizer_file:
+android_studio:
+gradle:
+agp:
+kotlin:
+compose_bom:
+minSdk:
+compileSdk:
+targetSdk:
+test_devices:

@@ -1,0 +1,15 @@
+# Reporting resources shown in the app.
+# RULE: nothing here is trusted until checked_on is filled after visiting the official site.
+resources:
+  - id: national_cybercrime_helpline
+    label: National cybercrime helpline
+    value: "1930"
+    checked_on: ""
+  - id: cybercrime_portal
+    label: National Cyber Crime Reporting Portal
+    value: "cybercrime.gov.in"
+    checked_on: ""
+  - id: sanchar_saathi
+    label: Sanchar Saathi (report suspected fraud communication)
+    value: "sancharsaathi.gov.in"
+    checked_on: ""

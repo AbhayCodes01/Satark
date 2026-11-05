@@ -1,0 +1,38 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Models and large artifacts (use GitHub Releases or Git LFS)
+*.pte
+*.pth
+*.safetensors
+*.gguf
+tokenizer.model
+tokenizer.bin
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+data/audio/
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.apk
+*.aab
+*.aar
+*.jks
+*.keystore
+
+# Secrets and OS files
+.env
+*.pem
+.DS_Store
+Thumbs.db
+.idea/

@@ -1,10 +1,10 @@
-executorch_python:
-executorch_android_aar:   # must equal executorch_python
-python:
-torch:
-llama_model_id:
-llama_quantization:
-tokenizer_file:
+executorch_python:1.5.1
+executorch_android_aar: 1.5.1
+python:3.13.1
+torch:2.14.0 (CPU)
+llama_model_id: meta-llama/Llama-3.2-1B-Instruct (original/ files, revision 9213176726f574b556790deb65791e0c5aa438b6)
+llama_quantization:8da4w, embedding_quantize 4,32, XNNPACK extended_ops, max_seq_length 256, max_context_length 512 (llm/llama32_1b_8da4w_et151.yaml)
+tokenizer_file: original/tokenizer.model
 android_studio:
 gradle:
 agp:

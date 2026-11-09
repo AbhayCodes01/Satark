@@ -1,0 +1,335 @@
+# Satark template families, v0 (STARTER SET)
+#
+# STATUS: DRAFT. Written by Claude. English, Hindi (Devanagari) and Hinglish (romanized) wording
+# must be reviewed by the project owner before it counts as "verified".
+#
+# A "family" is ONE scenario expressed in every language. The train/val/test split is done
+# per family, so a scenario and its translations never end up on both sides of the split.
+#
+# Fields:
+#   family_id : unique, stable id
+#   label     : scam | ham
+#   codes     : reason codes from data/taxonomy.yaml (empty list for ham)
+#   variants  : language -> list of message templates
+#
+# Slots (filled randomly by ml/generate_data.py):
+#   {bank} {amount} {fee} {phone} {name} {upi} {date} {otp} {last4} {shop}
+#   {pnr} {train} {url} {apk_url} {shop_url} {bill_url}
+# {url} / {apk_url} become suspicious-looking links (lookalike, shortener, IP, .apk).
+# {shop_url} is the real site matching {shop}; {bill_url} is a real electricity portal (legit messages only).
+# Optional per-family field: slot_overrides: {apk_names: [...]} for realistic file names.
+#
+# Scam rows below are for TRAINING A DETECTOR. Phone numbers, UPI ids and links are generated.
+
+families:
+  # ------------------------------------------------------------------ SCAMS
+  - family_id: scam_kyc_bank_001
+    label: scam
+    codes: [KYC_BANK_BLOCK, URGENCY, LOOKALIKE_DOMAIN]
+    variants:
+      en:
+        - "Dear customer, your {bank} account will be blocked today. Update your KYC immediately: {url}"
+        - "{bank} ALERT: KYC pending. Your account will be suspended within 24 hours. Click {url} to verify now."
+      hi:
+        - "प्रिय ग्राहक, आपका {bank} खाता आज बंद कर दिया जाएगा। तुरंत KYC अपडेट करें: {url}"
+        - "{bank} सूचना: आपका KYC अधूरा है। 24 घंटे में खाता बंद हो जाएगा। अभी वेरिफाई करें: {url}"
+      hinglish:
+        - "Dear customer, aapka {bank} account aaj block ho jayega. Turant KYC update karein: {url}"
+        - "{bank} alert: KYC pending hai. 24 ghante me account band ho jayega. Abhi verify karein {url}"
+
+  - family_id: scam_otp_001
+    label: scam
+    codes: [OTP_REQUEST, URGENCY]
+    variants:
+      en:
+        - "Your {bank} refund of Rs {amount} is pending. Reply with the OTP sent to your phone to receive it."
+        - "Sir, this is {bank} support. Please share the 6 digit OTP you just received to cancel the wrong transaction of Rs {amount}."
+      hi:
+        - "आपका {bank} रिफंड Rs {amount} बाकी है। पाने के लिए फोन पर आया OTP बताएं।"
+        - "सर, मैं {bank} सपोर्ट से बोल रहा हूँ। Rs {amount} का गलत ट्रांजैक्शन रद्द करने के लिए अभी आया 6 अंकों का OTP शेयर करें।"
+      hinglish:
+        - "Aapka {bank} refund Rs {amount} pending hai. Paane ke liye phone par aaya OTP reply karein."
+        - "Sir, {bank} support se bol raha hu. Rs {amount} ka galat transaction cancel karne ke liye abhi aaya 6 digit OTP share karein."
+
+  - family_id: scam_upi_collect_001
+    label: scam
+    codes: [UPI_COLLECT]
+    variants:
+      en:
+        - "You have received Rs {amount} cashback. Open your UPI app and approve the request from {upi} to receive money."
+        - "Congrats {name}! Rs {amount} is waiting for you. Accept the collect request from {upi} and enter your UPI PIN to get it."
+      hi:
+        - "आपको Rs {amount} कैशबैक मिला है। पैसे पाने के लिए UPI ऐप खोलकर {upi} का रिक्वेस्ट अप्रूव करें।"
+        - "बधाई {name}! Rs {amount} आपका इंतज़ार कर रहे हैं। {upi} की कलेक्ट रिक्वेस्ट स्वीकार करें और UPI PIN डालें।"
+      hinglish:
+        - "Aapko Rs {amount} cashback mila hai. Paise lene ke liye UPI app khol kar {upi} ki request approve karein."
+        - "Badhai ho {name}! Rs {amount} aapka wait kar rahe hain. {upi} ki collect request accept karein aur UPI PIN dalein."
+
+  - family_id: scam_electricity_001
+    label: scam
+    codes: [ELECTRICITY_DISCONNECT, URGENCY]
+    variants:
+      en:
+        - "Dear consumer, your electricity connection will be disconnected tonight at 9:30 PM due to unpaid bill. Call {phone} immediately."
+        - "Electricity bill of Rs {amount} not updated. Power will be cut today. Contact officer on {phone} now."
+      hi:
+        - "प्रिय उपभोक्ता, बिल जमा न होने के कारण आज रात 9:30 बजे आपका बिजली कनेक्शन काट दिया जाएगा। तुरंत {phone} पर कॉल करें।"
+        - "आपका Rs {amount} का बिजली बिल अपडेट नहीं हुआ है। आज बिजली कट जाएगी। अभी {phone} पर अधिकारी से संपर्क करें।"
+      hinglish:
+        - "Dear consumer, bill jama na hone ke karan aaj raat 9:30 baje aapka bijli connection kat diya jayega. Turant {phone} par call karein."
+        - "Aapka Rs {amount} ka bijli bill update nahi hua hai. Aaj light kat jayegi. Abhi {phone} par officer se baat karein."
+
+  - family_id: scam_courier_001
+    label: scam
+    codes: [COURIER_CUSTOMS, LOOKALIKE_DOMAIN]
+    variants:
+      en:
+        - "Your parcel is held at customs. Pay a clearance fee of Rs {amount} at {url} to get it delivered."
+        - "India Post: delivery failed due to incomplete address. Update address and pay Rs {amount} here: {url}"
+      hi:
+        - "आपका पार्सल कस्टम में रोका गया है। डिलीवरी के लिए Rs {amount} क्लियरेंस फीस यहाँ जमा करें: {url}"
+        - "इंडिया पोस्ट: अधूरे पते के कारण डिलीवरी नहीं हो सकी। पता अपडेट करें और Rs {amount} यहाँ भरें: {url}"
+      hinglish:
+        - "Aapka parcel customs me ruka hai. Delivery ke liye Rs {amount} clearance fee yahan bharein: {url}"
+        - "India Post: adhoore address ki wajah se delivery fail ho gayi. Address update karein aur Rs {amount} yahan bharein: {url}"
+
+  - family_id: scam_challan_001
+    label: scam
+    codes: [FAKE_CHALLAN, MALICIOUS_APK]
+    slot_overrides: {apk_names: [RTO_Challan, Parivahan_Pay, Echallan_Notice]}
+    variants:
+      en:
+        - "Traffic e-challan of Rs {amount} issued on your vehicle. Download the app to view and pay: {apk_url}"
+        - "RTO notice: your vehicle has a pending challan. Install the Parivahan app from {apk_url} to avoid court action."
+      hi:
+        - "आपके वाहन पर Rs {amount} का ई-चालान जारी हुआ है। देखने और भरने के लिए ऐप डाउनलोड करें: {apk_url}"
+        - "RTO सूचना: आपके वाहन का चालान बाकी है। कोर्ट कार्रवाई से बचने के लिए {apk_url} से परिवहन ऐप इंस्टॉल करें।"
+      hinglish:
+        - "Aapki gaadi par Rs {amount} ka e-challan issue hua hai. Dekhne aur bharne ke liye app download karein: {apk_url}"
+        - "RTO notice: aapki gaadi ka challan pending hai. Court action se bachne ke liye {apk_url} se Parivahan app install karein."
+
+  - family_id: scam_govt_scheme_001
+    label: scam
+    codes: [GOVT_SCHEME, MALICIOUS_APK]
+    slot_overrides: {apk_names: [PM_Kisan_Yojana, Kisan_Subsidy, Govt_Scheme_Form]}
+    variants:
+      en:
+        - "PM Kisan: Rs {amount} installment is ready for you. Install the PM Kisan app to claim: {apk_url}"
+        - "Congratulations! You are selected for a government subsidy of Rs {amount}. Download the form app here: {apk_url}"
+      hi:
+        - "पीएम किसान: Rs {amount} की किस्त आपके लिए तैयार है। पाने के लिए पीएम किसान ऐप इंस्टॉल करें: {apk_url}"
+        - "बधाई हो! आपका चयन Rs {amount} की सरकारी सब्सिडी के लिए हुआ है। फॉर्म ऐप यहाँ से डाउनलोड करें: {apk_url}"
+      hinglish:
+        - "PM Kisan: Rs {amount} ki kist aapke liye ready hai. Claim karne ke liye PM Kisan app install karein: {apk_url}"
+        - "Badhai ho! Aapka selection Rs {amount} ki sarkari subsidy ke liye hua hai. Form app yahan se download karein: {apk_url}"
+
+  - family_id: scam_lottery_001
+    label: scam
+    codes: [LOTTERY_PRIZE]
+    variants:
+      en:
+        - "Congratulations {name}! You won Rs {amount} in the KBC lucky draw. Pay a processing fee of Rs {fee} to claim the prize."
+        - "You have won a lottery of Rs {amount}. Contact {phone} and pay the registration fee to receive your prize."
+      hi:
+        - "बधाई हो {name}! आपने KBC लकी ड्रॉ में Rs {amount} जीते हैं। इनाम पाने के लिए Rs {fee} प्रोसेसिंग फीस भरें।"
+        - "आपकी Rs {amount} की लॉटरी निकली है। इनाम पाने के लिए {phone} पर संपर्क करें और रजिस्ट्रेशन फीस जमा करें।"
+      hinglish:
+        - "Badhai ho {name}! Aapne KBC lucky draw me Rs {amount} jeete hain. Inaam lene ke liye Rs {fee} processing fee bharein."
+        - "Aapki Rs {amount} ki lottery nikli hai. Inaam paane ke liye {phone} par contact karein aur registration fee jama karein."
+
+  - family_id: scam_job_task_001
+    label: scam
+    codes: [JOB_TASK_SCAM]
+    variants:
+      en:
+        - "Part-time job offer: earn Rs {amount} per day by liking videos from home. Join our Telegram group now: {url}"
+        - "Hiring for work from home. Simple tasks, daily income Rs {amount}. WhatsApp {phone} to start today."
+      hi:
+        - "पार्ट-टाइम जॉब: घर बैठे वीडियो लाइक करके रोज़ Rs {amount} कमाएं। अभी हमारा टेलीग्राम ग्रुप जॉइन करें: {url}"
+        - "वर्क फ्रॉम होम के लिए भर्ती। आसान टास्क, रोज़ की कमाई Rs {amount}। आज ही शुरू करने के लिए {phone} पर व्हाट्सऐप करें।"
+      hinglish:
+        - "Part-time job offer: ghar baithe videos like karke roz Rs {amount} kamayein. Abhi hamara Telegram group join karein: {url}"
+        - "Work from home ke liye hiring. Easy tasks, daily income Rs {amount}. Aaj hi shuru karne ke liye {phone} par WhatsApp karein."
+
+  - family_id: scam_sim_block_001
+    label: scam
+    codes: [SIM_BLOCK, URGENCY]
+    variants:
+      en:
+        - "TRAI notice: your SIM will be blocked in 2 hours due to KYC verification pending. Call {phone} to avoid disconnection."
+        - "Your mobile number will be disconnected today. Verify Aadhaar now: {url}"
+      hi:
+        - "TRAI सूचना: KYC वेरिफिकेशन बाकी होने के कारण आपका सिम 2 घंटे में बंद हो जाएगा। बचने के लिए {phone} पर कॉल करें।"
+        - "आपका मोबाइल नंबर आज बंद कर दिया जाएगा। अभी आधार वेरिफाई करें: {url}"
+      hinglish:
+        - "TRAI notice: KYC verification pending hone ki wajah se aapka SIM 2 ghante me block ho jayega. Bachne ke liye {phone} par call karein."
+        - "Aapka mobile number aaj band kar diya jayega. Abhi Aadhaar verify karein: {url}"
+
+  - family_id: scam_digital_arrest_001
+    label: scam
+    codes: [DIGITAL_ARREST, URGENCY]
+    variants:
+      en:
+        - "This is the cyber crime branch. A parcel with illegal items was found in your name. Call {phone} immediately or you will be arrested."
+        - "CBI notice: your Aadhaar is linked to a money laundering case. Do not disconnect this call. Contact {phone} to avoid arrest."
+      hi:
+        - "यह साइबर क्राइम ब्रांच है। आपके नाम से अवैध सामान वाला पार्सल मिला है। तुरंत {phone} पर कॉल करें वरना आपको गिरफ्तार किया जाएगा।"
+        - "CBI नोटिस: आपका आधार मनी लॉन्ड्रिंग केस से जुड़ा है। यह कॉल न काटें। गिरफ्तारी से बचने के लिए {phone} पर संपर्क करें।"
+      hinglish:
+        - "Yeh cyber crime branch hai. Aapke naam se illegal saamaan wala parcel mila hai. Turant {phone} par call karein warna aapko arrest kiya jayega."
+        - "CBI notice: aapka Aadhaar money laundering case se juda hai. Yeh call na kaatein. Arrest se bachne ke liye {phone} par contact karein."
+
+  - family_id: scam_loan_app_001
+    label: scam
+    codes: [LOAN_APP, MALICIOUS_APK]
+    slot_overrides: {apk_names: [Loan_Instant, Quick_Cash_Loan, Easy_Loan_Now]}
+    variants:
+      en:
+        - "Instant loan up to Rs {amount} in 5 minutes. No documents needed. Install the app now: {apk_url}"
+      hi:
+        - "5 मिनट में Rs {amount} तक का इंस्टेंट लोन। किसी दस्तावेज़ की ज़रूरत नहीं। अभी ऐप इंस्टॉल करें: {apk_url}"
+      hinglish:
+        - "5 minute me Rs {amount} tak ka instant loan. Koi document nahi chahiye. Abhi app install karein: {apk_url}"
+
+  - family_id: scam_investment_001
+    label: scam
+    codes: [INVESTMENT_CRYPTO, LOOKALIKE_DOMAIN]
+    variants:
+      en:
+        - "Join our VIP stock tips group. Guaranteed 30% returns in 7 days. Invest Rs {amount} today: {url}"
+        - "Double your money in 15 days with crypto trading. Deposit Rs {amount} and start earning: {url}"
+      hi:
+        - "हमारे VIP स्टॉक टिप्स ग्रुप से जुड़ें। 7 दिन में गारंटीड 30% रिटर्न। आज Rs {amount} निवेश करें: {url}"
+        - "क्रिप्टो ट्रेडिंग से 15 दिन में पैसे दोगुने करें। Rs {amount} जमा करें और कमाई शुरू करें: {url}"
+      hinglish:
+        - "Hamare VIP stock tips group se judein. 7 din me guaranteed 30% returns. Aaj Rs {amount} invest karein: {url}"
+        - "Crypto trading se 15 din me paise double karein. Rs {amount} jama karein aur kamai shuru karein: {url}"
+
+  # ------------------------------------------------- LEGITIMATE (hard negatives)
+  - family_id: ham_bank_debit_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Rs {amount} debited from A/c XX{last4} on {date}. If not done by you, call your bank on the number printed on your card. -{bank}"
+        - "Your A/c XX{last4} is debited by Rs {amount} on {date}. Check balance on the app. -{bank}"
+      hi:
+        - "Rs {amount} आपके खाते XX{last4} से {date} को डेबिट हुए। आपने नहीं किए तो कार्ड पर छपे नंबर पर बैंक को कॉल करें। -{bank}"
+      hinglish:
+        - "Rs {amount} aapke A/c XX{last4} se {date} ko debit hue. Aapne nahi kiye to card par chhape number par bank ko call karein. -{bank}"
+
+  - family_id: ham_bank_credit_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Rs {amount} credited to your A/c XX{last4} on {date}. -{bank}"
+      hi:
+        - "Rs {amount} आपके खाते XX{last4} में {date} को जमा हुए। -{bank}"
+      hinglish:
+        - "Rs {amount} aapke A/c XX{last4} me {date} ko credit hue. -{bank}"
+
+  - family_id: ham_otp_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "{otp} is your OTP for login. Do not share it with anyone. -{bank}"
+        - "Use {otp} as OTP for your transaction of Rs {amount}. Never share OTP with anyone, bank staff will not ask. -{bank}"
+      hi:
+        - "{otp} आपका लॉगिन OTP है। इसे किसी से साझा न करें। -{bank}"
+        - "Rs {amount} के ट्रांजैक्शन के लिए OTP {otp} है। OTP किसी को न बताएं, बैंक कर्मचारी कभी नहीं मांगते। -{bank}"
+      hinglish:
+        - "{otp} aapka login OTP hai. Ise kisi se share na karein. -{bank}"
+        - "Rs {amount} ke transaction ke liye OTP {otp} hai. OTP kisi ko na batayein, bank staff kabhi nahi maangte. -{bank}"
+
+  - family_id: ham_bank_warning_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Dear customer, never share your OTP, PIN or CVV with anyone. {bank} will never ask for it on call or SMS."
+      hi:
+        - "प्रिय ग्राहक, अपना OTP, PIN या CVV किसी से साझा न करें। {bank} कभी कॉल या SMS पर इसे नहीं मांगता।"
+      hinglish:
+        - "Dear customer, apna OTP, PIN ya CVV kisi se share na karein. {bank} kabhi call ya SMS par ise nahi maangta."
+
+  - family_id: ham_delivery_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Your {shop} order will be delivered today between 2 PM and 6 PM. Track here: {shop_url}"
+      hi:
+        - "आपका {shop} ऑर्डर आज दोपहर 2 से शाम 6 बजे के बीच पहुंचेगा। ट्रैक करें: {shop_url}"
+      hinglish:
+        - "Aapka {shop} order aaj dopahar 2 se shaam 6 baje ke beech pahunchega. Track karein: {shop_url}"
+
+  - family_id: ham_recharge_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Recharge of Rs {amount} successful. Validity 28 days. Thank you for choosing us."
+      hi:
+        - "Rs {amount} का रिचार्ज सफल रहा। वैधता 28 दिन। हमें चुनने के लिए धन्यवाद।"
+      hinglish:
+        - "Rs {amount} ka recharge safal raha. Validity 28 din. Hamein chunne ke liye dhanyavaad."
+
+  - family_id: ham_utility_bill_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Your electricity bill of Rs {amount} is due on {date}. Pay on the official portal {bill_url} or at your nearest bill centre."
+      hi:
+        - "आपका Rs {amount} का बिजली बिल {date} तक देय है। आधिकारिक पोर्टल {bill_url} या नज़दीकी बिल केंद्र पर भुगतान करें।"
+      hinglish:
+        - "Aapka Rs {amount} ka bijli bill {date} tak due hai. Official portal {bill_url} ya nazdiki bill centre par bhugtan karein."
+
+  - family_id: ham_appointment_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Reminder: your appointment with Dr {name} is on {date} at 11 AM. Please carry your previous reports."
+      hi:
+        - "याद दिलाना: डॉ {name} के साथ आपकी अपॉइंटमेंट {date} को सुबह 11 बजे है। पिछली रिपोर्ट साथ लाएं।"
+      hinglish:
+        - "Reminder: Dr {name} ke saath aapki appointment {date} ko subah 11 baje hai. Pichli reports saath layein."
+
+  - family_id: ham_family_chat_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "Hi {name}, are you coming home this weekend? Mom is making your favourite food."
+        - "Please call me when you are free, need to talk about the travel plan."
+      hi:
+        - "{name}, क्या तुम इस हफ्ते घर आ रहे हो? मम्मी तुम्हारा पसंदीदा खाना बना रही हैं।"
+        - "फ्री होकर मुझे फोन करना, यात्रा की योजना पर बात करनी है।"
+      hinglish:
+        - "{name}, kya tum is weekend ghar aa rahe ho? Mummy tumhara favourite khana bana rahi hain."
+        - "Free hokar mujhe call karna, travel plan ke bare me baat karni hai."
+
+  - family_id: ham_irctc_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "PNR {pnr}: your ticket is confirmed. Train {train} departs on {date}. Wish you a happy journey."
+      hi:
+        - "PNR {pnr}: आपका टिकट कन्फर्म है। ट्रेन {train} {date} को रवाना होगी। शुभ यात्रा।"
+      hinglish:
+        - "PNR {pnr}: aapka ticket confirm hai. Train {train} {date} ko rawana hogi. Shubh yatra."
+
+  - family_id: ham_shop_promo_001
+    label: ham
+    codes: []
+    variants:
+      en:
+        - "{shop} Diwali sale ends tonight! Up to 50% off. Shop at {shop_url}"
+      hi:
+        - "{shop} दिवाली सेल आज रात खत्म! 50% तक की छूट। यहाँ खरीदें: {shop_url}"
+      hinglish:
+        - "{shop} Diwali sale aaj raat khatam! 50% tak ki chhoot. Yahan khareedein: {shop_url}"

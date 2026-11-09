@@ -35,4 +35,9 @@ android/local.properties
 *.pem
 .DS_Store
 Thumbs.db
-.idea/
+.idea/models/
+build/
+models/
+outputs/
+
+.venv*/

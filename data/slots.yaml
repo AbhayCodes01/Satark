@@ -1,0 +1,31 @@
+# Slot values for ml/generate_data.py. Extend freely; keep everything synthetic.
+banks: [SBI, HDFC Bank, ICICI Bank, Axis Bank, PNB, Bank of Baroda, Kotak Bank, Canara Bank, Union Bank, IDFC First Bank]
+
+names: [Rahul, Priya, Amit, Sneha, Rohit, Anita, Vikram, Pooja, Suresh, Kavita, Manoj, Neha, Arjun, Sunita, Deepak, Ritu, Ramesh, Meena, Sanjay, Lata]
+amounts: ["10", "49", "149", "299", "499", "999", "1,250", "2,500", "4,999", "5,000", "9,999", "24,999", "50,000"]
+fees: ["99", "199", "499", "999", "1,500", "2,999"]
+upi_handles: [ybl, oksbi, paytm, okaxis, okicici, upi]
+upi_words: [refund, cashback, reward, support, offer, claim]
+
+# Suspicious-link ingredients (for {url} / {apk_url})
+brand_tokens: [sbi, hdfc, icici, axis, pnb, bob, kotak, canara, paytm, phonepe, gpay, irctc, uidai, echallan, parivahan, pmkisan, indiapost, bsnl, jio, airtel]
+url_words: [kyc, update, secure, verify, login, support, care, claim, reward, help]
+bad_tlds: [xyz, top, click, online, site, info, cc, icu, buzz, shop]
+shorteners: [bit.ly, tinyurl.com, cutt.ly, t.ly, rb.gy, is.gd]
+apk_names: [RTO_Challan, PM_Kisan_Yojana, Parivahan_Pay, SBI_Rewards, Loan_Instant, Kisan_Subsidy, Govt_Scheme_Form]
+
+# Real official sites, used ONLY in legitimate messages. {shop_url} always matches {shop}.
+shops:
+  Amazon: https://www.amazon.in
+  Flipkart: https://www.flipkart.com
+  Myntra: https://www.myntra.com
+  BigBasket: https://www.bigbasket.com
+  Nykaa: https://www.nykaa.com
+  Meesho: https://www.meesho.com
+  Swiggy: https://www.swiggy.com
+  Zepto: https://www.zeptonow.com
+# Electricity portals for legitimate bill reminders. Verify each domain before release.
+bill_urls:
+  - https://www.mahadiscom.in
+  - https://www.bsesdelhi.com
+  - https://www.adanielectricity.com

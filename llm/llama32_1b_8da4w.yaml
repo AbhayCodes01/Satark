@@ -1,0 +1,40 @@
+# P0-06: first-try export config, Llama 3.2 1B Instruct -> ExecuTorch (.pte), XNNPACK, 8da4w
+# Save as: llm/llama32_1b_8da4w.yaml  (run from the repo root, venv active)
+#
+# STATUS: UNTESTED. Key names come from the official ExecuTorch "export_llm" docs and
+# the tool's own --help (which takes only --config). Paths below assume the files from
+# the Hugging Face "original/" folder were downloaded to models/llama-3.2-1b-instruct/.
+# If the tool rejects a key or a path, paste the full error back. Do not edit blindly.
+#
+# Run:
+#   python -m executorch.extension.llm.export.export_llm --config llm\llama32_1b_8da4w.yaml
+
+base:
+  model_class: llama3_2
+  checkpoint: models/llama-3.2-1b-instruct/original/consolidated.00.pth
+  params: models/llama-3.2-1b-instruct/original/params.json
+  # BOS/EOS ids as shown in the ExecuTorch docs example for Llama 3 family models.
+  # To be confirmed against the model's tokenizer_config.json.
+  metadata: '{"get_bos_id":128000, "get_eos_ids":[128009, 128001]}'
+
+model:
+  use_kv_cache: True
+  use_sdpa_with_kv_cache: True
+
+quantization:
+  qmode: 8da4w            # int8 dynamic activations + int4 weights (first candidate)
+  embedding_quantize: 4,32
+
+backend:
+  xnnpack:
+    enabled: True
+    extended_ops: True
+
+export:
+  # Our design choice (short evidence prompt in, ~80 tokens out). Smaller context = less RAM.
+  max_seq_length: 256
+  max_context_length: 512
+  output_name: llama32_1b_8da4w.pte
+
+debug:
+  verbose: True           # shows which ops were delegated to XNNPACK

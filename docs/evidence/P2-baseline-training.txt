@@ -1,0 +1,11 @@
+﻿threshold (chosen on val): 0.75
+val  n= 252 precision=0.986 recall=1.000 FPR=0.018  errors by scenario: {'ham_otp_001': 2}
+       en        n= 84 P=1.00 R=1.00 FPR=0.00
+       hi        n= 84 P=0.96 R=1.00 FPR=0.06
+       hinglish  n= 84 P=1.00 R=1.00 FPR=0.00
+test n= 219 precision=1.000 recall=0.965 FPR=0.000  errors by scenario: {'scam_digital_arrest_001': 5}
+       en        n= 80 P=1.00 R=0.92 FPR=0.00
+       hi        n= 67 P=1.00 R=0.98 FPR=0.00
+       hinglish  n= 72 P=1.00 R=1.00 FPR=0.00
+saved models -> models\baseline_v0.joblib (eval), models\baseline_v0_full.joblib (pipeline)   metrics -> ml\results\baseline_v0.json
+REMINDER: synthetic data, few scenarios per split. These numbers are NOT reportable accuracy.

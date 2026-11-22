@@ -1,0 +1,104 @@
+{
+  "threshold": 0.75,
+  "train_rows": 845,
+  "synthetic_only": true,
+  "note": "Synthetic templates, few scenarios per split. Not reportable accuracy.",
+  "val": {
+    "n": 252,
+    "precision": 0.9863,
+    "recall": 1.0,
+    "f1": 0.9931,
+    "false_positive_rate": 0.0185,
+    "tp": 144,
+    "fp": 2,
+    "fn": 0,
+    "tn": 106,
+    "by_language": {
+      "en": {
+        "n": 84,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "tp": 48,
+        "fp": 0,
+        "fn": 0,
+        "tn": 36
+      },
+      "hi": {
+        "n": 84,
+        "precision": 0.96,
+        "recall": 1.0,
+        "f1": 0.9796,
+        "false_positive_rate": 0.0556,
+        "tp": 48,
+        "fp": 2,
+        "fn": 0,
+        "tn": 34
+      },
+      "hinglish": {
+        "n": 84,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "tp": 48,
+        "fp": 0,
+        "fn": 0,
+        "tn": 36
+      }
+    },
+    "errors_by_family": {
+      "ham_otp_001": 2
+    }
+  },
+  "test": {
+    "n": 219,
+    "precision": 1.0,
+    "recall": 0.9653,
+    "f1": 0.9823,
+    "false_positive_rate": 0.0,
+    "tp": 139,
+    "fp": 0,
+    "fn": 5,
+    "tn": 75,
+    "by_language": {
+      "en": {
+        "n": 80,
+        "precision": 1.0,
+        "recall": 0.9167,
+        "f1": 0.9565,
+        "false_positive_rate": 0.0,
+        "tp": 44,
+        "fp": 0,
+        "fn": 4,
+        "tn": 32
+      },
+      "hi": {
+        "n": 67,
+        "precision": 1.0,
+        "recall": 0.9792,
+        "f1": 0.9895,
+        "false_positive_rate": 0.0,
+        "tp": 47,
+        "fp": 0,
+        "fn": 1,
+        "tn": 19
+      },
+      "hinglish": {
+        "n": 72,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "tp": 48,
+        "fp": 0,
+        "fn": 0,
+        "tn": 24
+      }
+    },
+    "errors_by_family": {
+      "scam_digital_arrest_001": 5
+    }
+  }
+}

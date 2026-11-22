@@ -1,0 +1,318 @@
+# Satark phrase bank v0
+#
+# This is the trusted explanation text shown to the user (Tier 0, and the fallback when Llama
+# fails the verifier). Nothing here is generated at runtime, so it cannot hallucinate.
+#
+# STATUS: ALL LANGUAGES ARE DRAFTS written by Claude. A language may only be switched on in the
+# app after the project owner has read EVERY string and set that language's status to "verified"
+# in the `review` table below. Odia, Gujarati, Bengali and Marathi drafts especially need a
+# careful native read: check grammar, naturalness, and that nothing sounds scary or confusing.
+#
+# Wording rules (keep these when editing):
+#   * Short, simple sentences. Written for a low-literacy reader and for text-to-speech.
+#   * Never claim certainty ("this is definitely a scam"). Use "may be" / "signs of".
+#   * Never tell the user a message is "safe". Only "no clear danger found, but stay careful".
+#   * Helpline: 1930 and cybercrime.gov.in. Re-verify on the official sites before release.
+#
+# How the app uses this file:
+#   verdicts      -> headline for the traffic-light band
+#   reasons       -> one sentence per reason code that fired (max 2 shown)
+#   code_actions  -> ordered action keys for the codes that fired (max 3 shown)
+#   actions       -> the action sentences. In the DANGEROUS band the app always appends REPORT_1930.
+
+version: 1
+languages: [en, hi, hinglish, mr, gu, bn, or]
+
+review:
+  en:       {status: draft, verified_by: "", verified_on: ""}
+  hi:       {status: draft, verified_by: "", verified_on: ""}
+  hinglish: {status: draft, verified_by: "", verified_on: ""}
+  mr:       {status: draft, verified_by: "", verified_on: ""}
+  gu:       {status: draft, verified_by: "", verified_on: ""}
+  bn:       {status: draft, verified_by: "", verified_on: ""}
+  or:       {status: draft, verified_by: "", verified_on: ""}
+
+verdicts:
+  SAFE_LOOKING:
+    en: "No clear danger found, but stay careful."
+    hi: "कोई साफ़ खतरा नहीं मिला, फिर भी सावधान रहें।"
+    hinglish: "Koi saaf khatra nahi mila, phir bhi savdhan rahein."
+    mr: "कोणताही स्पष्ट धोका आढळला नाही, तरीही सावध राहा."
+    gu: "કોઈ સ્પષ્ટ જોખમ મળ્યું નથી, છતાં સાવચેત રહો."
+    bn: "কোনো স্পষ্ট বিপদ পাওয়া যায়নি, তবুও সতর্ক থাকুন।"
+    or: "କୌଣସି ସ୍ପଷ୍ଟ ବିପଦ ମିଳିଲା ନାହିଁ, ତଥାପି ସତର୍କ ରୁହନ୍ତୁ।"
+  SUSPICIOUS:
+    en: "Be careful: this message may be a scam."
+    hi: "सावधान रहें: यह संदेश धोखा हो सकता है।"
+    hinglish: "Savdhan rahein: yeh message dhokha ho sakta hai."
+    mr: "सावध राहा: हा संदेश फसवणूक असू शकतो."
+    gu: "સાવચેત રહો: આ સંદેશ છેતરપિંડી હોઈ શકે છે."
+    bn: "সতর্ক থাকুন: এই বার্তাটি প্রতারণা হতে পারে।"
+    or: "ସତର୍କ ରୁହନ୍ତୁ: ଏହି ମେସେଜ୍ ଠକେଇ ହୋଇପାରେ।"
+  DANGEROUS:
+    en: "Danger: this message has serious signs of a scam."
+    hi: "खतरा: इस संदेश में धोखाधड़ी के गंभीर संकेत हैं।"
+    hinglish: "Khatra: is message me dhokhadhadi ke gambhir sanket hain."
+    mr: "धोका: या संदेशात फसवणुकीची गंभीर चिन्हे आहेत."
+    gu: "જોખમ: આ સંદેશમાં છેતરપિંડીના ગંભીર સંકેતો છે."
+    bn: "বিপদ: এই বার্তায় প্রতারণার গুরুতর লক্ষণ আছে।"
+    or: "ବିପଦ: ଏହି ମେସେଜ୍‌ରେ ଠକେଇର ଗୁରୁତର ଲକ୍ଷଣ ଅଛି।"
+
+actions:
+  DO_NOT_CLICK:
+    en: "Do not click the link."
+    hi: "लिंक पर क्लिक न करें।"
+    hinglish: "Link par click na karein."
+    mr: "लिंकवर क्लिक करू नका."
+    gu: "લિંક પર ક્લિક ન કરો."
+    bn: "লিংকে ক্লিক করবেন না।"
+    or: "ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ ନାହିଁ।"
+  DO_NOT_SHARE:
+    en: "Do not share your OTP, PIN or card details with anyone."
+    hi: "अपना OTP, PIN या कार्ड की जानकारी किसी को न बताएं।"
+    hinglish: "Apna OTP, PIN ya card ki jaankari kisi ko na batayein."
+    mr: "तुमचा OTP, PIN किंवा कार्डची माहिती कोणालाही सांगू नका."
+    gu: "તમારો OTP, PIN કે કાર્ડની માહિતી કોઈને ન આપો."
+    bn: "আপনার OTP, PIN বা কার্ডের তথ্য কাউকে দেবেন না।"
+    or: "ଆପଣଙ୍କ OTP, PIN କିମ୍ବା କାର୍ଡର ତଥ୍ୟ କାହାକୁ ଦିଅନ୍ତୁ ନାହିଁ।"
+  DO_NOT_INSTALL:
+    en: "Do not install the app."
+    hi: "ऐप इंस्टॉल न करें।"
+    hinglish: "App install na karein."
+    mr: "अॅप इंस्टॉल करू नका."
+    gu: "એપ ઇન્સ્ટોલ ન કરો."
+    bn: "অ্যাপ ইনস্টল করবেন না।"
+    or: "ଆପ୍ ଇନଷ୍ଟଲ୍ କରନ୍ତୁ ନାହିଁ।"
+  DO_NOT_PAY:
+    en: "Do not send any money."
+    hi: "पैसे न भेजें।"
+    hinglish: "Paise na bhejein."
+    mr: "पैसे पाठवू नका."
+    gu: "પૈસા ન મોકલો."
+    bn: "টাকা পাঠাবেন না।"
+    or: "ଟଙ୍କା ପଠାନ୍ତୁ ନାହିଁ।"
+  CALL_BANK_ON_CARD_NUMBER:
+    en: "If you are worried, call your bank on the number printed on your card."
+    hi: "चिंता हो तो अपने कार्ड पर छपे नंबर पर बैंक को कॉल करें।"
+    hinglish: "Chinta ho to apne card par chhape number par bank ko call karein."
+    mr: "काळजी वाटत असल्यास तुमच्या कार्डवर छापलेल्या नंबरवर बँकेला फोन करा."
+    gu: "ચિંતા હોય તો તમારા કાર્ડ પર છાપેલા નંબર પર બેંકને ફોન કરો."
+    bn: "চিন্তা হলে আপনার কার্ডে ছাপা নম্বরে ব্যাংককে ফোন করুন।"
+    or: "ଚିନ୍ତା ହେଉଥିଲେ ଆପଣଙ୍କ କାର୍ଡରେ ଛପା ନମ୍ବରରେ ବ୍ୟାଙ୍କକୁ ଫୋନ୍ କରନ୍ତୁ।"
+  VERIFY_OFFICIAL:
+    en: "Check only on the official website, or by calling the official number, not the number in the message."
+    hi: "सिर्फ आधिकारिक वेबसाइट पर या आधिकारिक नंबर पर कॉल करके जांचें, संदेश वाले नंबर पर नहीं।"
+    hinglish: "Sirf official website par ya official number par call karke jaanchein, message wale number par nahi."
+    mr: "फक्त अधिकृत वेबसाइटवर किंवा अधिकृत नंबरवर फोन करून तपासा, संदेशातील नंबरवर नाही."
+    gu: "ફક્ત સત્તાવાર વેબસાઇટ પર કે સત્તાવાર નંબર પર ફોન કરીને તપાસો, સંદેશમાંના નંબર પર નહીં."
+    bn: "শুধু অফিসিয়াল ওয়েবসাইটে বা অফিসিয়াল নম্বরে ফোন করে যাচাই করুন, বার্তার নম্বরে নয়।"
+    or: "କେବଳ ଅଫିସିଆଲ୍ ୱେବସାଇଟ୍‌ରେ କିମ୍ବା ଅଫିସିଆଲ୍ ନମ୍ବରରେ ଫୋନ୍ କରି ଯାଞ୍ଚ କରନ୍ତୁ, ମେସେଜ୍‌ର ନମ୍ବରରେ ନୁହେଁ।"
+  REPORT_1930:
+    en: "If money was taken, call 1930 right away and report at cybercrime.gov.in."
+    hi: "पैसे कट गए हों तो तुरंत 1930 पर कॉल करें और cybercrime.gov.in पर शिकायत करें।"
+    hinglish: "Paise kat gaye hon to turant 1930 par call karein aur cybercrime.gov.in par shikayat karein."
+    mr: "पैसे गेले असतील तर लगेच 1930 वर फोन करा आणि cybercrime.gov.in वर तक्रार करा."
+    gu: "પૈસા કપાઈ ગયા હોય તો તરત 1930 પર ફોન કરો અને cybercrime.gov.in પર ફરિયાદ કરો."
+    bn: "টাকা কেটে গেলে সঙ্গে সঙ্গে 1930-এ ফোন করুন এবং cybercrime.gov.in-এ অভিযোগ জানান।"
+    or: "ଟଙ୍କା କଟିଯାଇଥିଲେ ତୁରନ୍ତ 1930 ରେ ଫୋନ୍ କରନ୍ତୁ ଏବଂ cybercrime.gov.in ରେ ଅଭିଯୋଗ କରନ୍ତୁ।"
+  TALK_TO_FAMILY:
+    en: "Show this message to someone you trust before doing anything."
+    hi: "कुछ भी करने से पहले यह संदेश किसी भरोसेमंद व्यक्ति को दिखाएं।"
+    hinglish: "Kuch bhi karne se pehle yeh message kisi bharosemand vyakti ko dikhayein."
+    mr: "काहीही करण्यापूर्वी हा संदेश एखाद्या विश्वासू व्यक्तीला दाखवा."
+    gu: "કંઈ પણ કરતાં પહેલાં આ સંદેશ કોઈ વિશ્વાસુ વ્યક્તિને બતાવો."
+    bn: "কিছু করার আগে এই বার্তা কোনো বিশ্বস্ত মানুষকে দেখান।"
+    or: "କିଛି କରିବା ପୂର୍ବରୁ ଏହି ମେସେଜ୍ ଜଣେ ବିଶ୍ୱାସୀ ବ୍ୟକ୍ତିଙ୍କୁ ଦେଖାନ୍ତୁ।"
+  HANG_UP:
+    en: "Hang up. Do not send money or share any details."
+    hi: "कॉल काट दें। पैसे न भेजें और कोई जानकारी न दें।"
+    hinglish: "Call kaat dein. Paise na bhejein aur koi jaankari na dein."
+    mr: "फोन कट करा. पैसे पाठवू नका आणि कोणतीही माहिती देऊ नका."
+    gu: "ફોન કાપી નાખો. પૈસા ન મોકલો અને કોઈ માહિતી ન આપો."
+    bn: "ফোন কেটে দিন। টাকা পাঠাবেন না এবং কোনো তথ্য দেবেন না।"
+    or: "ଫୋନ୍ କାଟି ଦିଅନ୍ତୁ। ଟଙ୍କା ପଠାନ୍ତୁ ନାହିଁ ଏବଂ କୌଣସି ତଥ୍ୟ ଦିଅନ୍ତୁ ନାହିଁ।"
+
+# First action is the primary one shown large on screen.
+code_actions:
+  URGENCY:                [VERIFY_OFFICIAL, TALK_TO_FAMILY]
+  KYC_BANK_BLOCK:         [DO_NOT_CLICK, CALL_BANK_ON_CARD_NUMBER, DO_NOT_SHARE]
+  OTP_REQUEST:            [DO_NOT_SHARE, CALL_BANK_ON_CARD_NUMBER]
+  UPI_COLLECT:            [DO_NOT_PAY, DO_NOT_SHARE]
+  LOTTERY_PRIZE:          [DO_NOT_PAY, TALK_TO_FAMILY]
+  ELECTRICITY_DISCONNECT: [VERIFY_OFFICIAL, DO_NOT_PAY]
+  COURIER_CUSTOMS:        [DO_NOT_CLICK, VERIFY_OFFICIAL, DO_NOT_PAY]
+  DIGITAL_ARREST:         [HANG_UP, TALK_TO_FAMILY]
+  SIM_BLOCK:              [DO_NOT_CLICK, VERIFY_OFFICIAL]
+  FAKE_CHALLAN:           [DO_NOT_INSTALL, VERIFY_OFFICIAL]
+  JOB_TASK_SCAM:          [DO_NOT_PAY, TALK_TO_FAMILY]
+  LOAN_APP:               [DO_NOT_INSTALL, VERIFY_OFFICIAL]
+  GOVT_SCHEME:            [DO_NOT_INSTALL, VERIFY_OFFICIAL]
+  INVESTMENT_CRYPTO:      [DO_NOT_PAY, TALK_TO_FAMILY]
+  MALICIOUS_APK:          [DO_NOT_INSTALL, DO_NOT_CLICK]
+  LOOKALIKE_DOMAIN:       [DO_NOT_CLICK, VERIFY_OFFICIAL]
+  SHORTENED_URL:          [DO_NOT_CLICK, VERIFY_OFFICIAL]
+  SUSPICIOUS_TLD_OR_IP:   [DO_NOT_CLICK, VERIFY_OFFICIAL]
+  UNKNOWN_SENDER_LINK:    [DO_NOT_CLICK, TALK_TO_FAMILY]
+  GENERIC_SUSPICIOUS:     [DO_NOT_CLICK, VERIFY_OFFICIAL, TALK_TO_FAMILY]
+
+reasons:
+  URGENCY:
+    en: "This message pushes you to decide in a hurry. Scammers use fear and deadlines so you cannot stop and think."
+    hi: "यह संदेश आपको जल्दबाज़ी में फैसला लेने को मजबूर करता है। ठग डर और समय-सीमा का सहारा लेते हैं ताकि आप सोच न सकें।"
+    hinglish: "Yeh message aapko jaldbaazi me faisla lene par majboor karta hai. Thug dar aur time-limit ka sahara lete hain taaki aap soch na sakein."
+    mr: "हा संदेश तुम्हाला घाईत निर्णय घ्यायला भाग पाडतो. ठग भीती आणि मुदतीचा वापर करतात, म्हणजे तुम्ही विचार करू शकत नाही."
+    gu: "આ સંદેશ તમને ઉતાવળમાં નિર્ણય લેવા દબાણ કરે છે. ઠગ લોકો ડર અને સમયમર્યાદાનો ઉપયોગ કરે છે જેથી તમે વિચારી ન શકો."
+    bn: "এই বার্তা আপনাকে তাড়াহুড়ো করে সিদ্ধান্ত নিতে চাপ দিচ্ছে। প্রতারকেরা ভয় আর সময়সীমা দেখায়, যাতে আপনি ভাবতে না পারেন।"
+    or: "ଏହି ମେସେଜ୍ ଆପଣଙ୍କୁ ତରବରରେ ନିଷ୍ପତ୍ତି ନେବାକୁ ବାଧ୍ୟ କରୁଛି। ଠକମାନେ ଭୟ ଓ ସମୟସୀମା ଦେଖାନ୍ତି, ଯେପରି ଆପଣ ଭାବି ନପାରିବେ।"
+  KYC_BANK_BLOCK:
+    en: "It says your bank account will be blocked unless you update KYC. Banks do not ask for this through links in messages."
+    hi: "इसमें कहा गया है कि KYC अपडेट न करने पर आपका बैंक खाता बंद हो जाएगा। बैंक कभी संदेश में लिंक भेजकर ऐसा नहीं कराते।"
+    hinglish: "Isme kaha gaya hai ki KYC update na karne par aapka bank account band ho jayega. Bank kabhi message me link bhej kar aisa nahi karwate."
+    mr: "यात म्हटले आहे की KYC अपडेट न केल्यास तुमचे बँक खाते बंद होईल. बँक कधीही संदेशात लिंक पाठवून असे करायला सांगत नाही."
+    gu: "તેમાં કહ્યું છે કે KYC અપડેટ ન કરો તો તમારું બેંક ખાતું બંધ થઈ જશે. બેંક ક્યારેય સંદેશમાં લિંક મોકલીને આવું કરાવતી નથી."
+    bn: "এতে বলা হয়েছে KYC আপডেট না করলে আপনার ব্যাংক অ্যাকাউন্ট বন্ধ হয়ে যাবে। ব্যাংক কখনো বার্তায় লিংক পাঠিয়ে এটা করায় না।"
+    or: "ଏଥିରେ କୁହାଯାଇଛି KYC ଅପଡେଟ୍ ନକଲେ ଆପଣଙ୍କ ବ୍ୟାଙ୍କ ଖାତା ବନ୍ଦ ହୋଇଯିବ। ବ୍ୟାଙ୍କ କେବେ ମେସେଜ୍‌ରେ ଲିଙ୍କ୍ ପଠାଇ ଏହା କରାଏ ନାହିଁ।"
+  OTP_REQUEST:
+    en: "It asks for your OTP or PIN. No bank or company ever asks for it."
+    hi: "यह आपसे OTP या PIN मांगता है। कोई बैंक या कंपनी कभी इसे नहीं मांगती।"
+    hinglish: "Yeh aapse OTP ya PIN maangta hai. Koi bank ya company kabhi ise nahi maangti."
+    mr: "हा तुमच्याकडे OTP किंवा PIN मागतो. कोणतीही बँक किंवा कंपनी तो कधीही मागत नाही."
+    gu: "આ તમારી પાસે OTP અથવા PIN માંગે છે. કોઈ બેંક કે કંપની ક્યારેય તે માંગતી નથી."
+    bn: "এটি আপনার কাছে OTP বা PIN চাইছে। কোনো ব্যাংক বা কোম্পানি কখনো তা চায় না।"
+    or: "ଏହା ଆପଣଙ୍କଠାରୁ OTP କିମ୍ବା PIN ମାଗୁଛି। କୌଣସି ବ୍ୟାଙ୍କ ବା କମ୍ପାନି କେବେ ଏହା ମାଗେ ନାହିଁ।"
+  UPI_COLLECT:
+    en: "It wants you to approve a payment request to 'receive' money. You never need a UPI PIN or an approval to receive money."
+    hi: "यह पैसे 'पाने' के लिए आपसे पेमेंट रिक्वेस्ट मंज़ूर करवाना चाहता है। पैसे पाने के लिए कभी UPI PIN या अप्रूवल की ज़रूरत नहीं होती।"
+    hinglish: "Yeh paise 'paane' ke liye aapse payment request approve karwana chahta hai. Paise paane ke liye kabhi UPI PIN ya approval ki zaroorat nahi hoti."
+    mr: "पैसे 'मिळवण्यासाठी' हा तुमच्याकडून पेमेंट रिक्वेस्ट मंजूर करून घेऊ इच्छितो. पैसे मिळवण्यासाठी कधीही UPI PIN किंवा मंजुरीची गरज नसते."
+    gu: "પૈસા 'મેળવવા' માટે આ તમારી પાસે પેમેન્ટ રિક્વેસ્ટ મંજૂર કરાવવા માંગે છે. પૈસા મેળવવા માટે ક્યારેય UPI PIN કે મંજૂરીની જરૂર પડતી નથી."
+    bn: "টাকা 'পাওয়ার' জন্য এটি আপনাকে পেমেন্ট রিকোয়েস্ট অনুমোদন করাতে চাইছে। টাকা পেতে কখনো UPI PIN বা অনুমোদনের দরকার হয় না।"
+    or: "ଟଙ୍କା 'ପାଇବା' ପାଇଁ ଏହା ଆପଣଙ୍କଠାରୁ ପେମେଣ୍ଟ ରିକ୍ୱେଷ୍ଟ ଅନୁମୋଦନ କରାଇବାକୁ ଚାହୁଁଛି। ଟଙ୍କା ପାଇବା ପାଇଁ କେବେ UPI PIN କିମ୍ବା ଅନୁମୋଦନ ଦରକାର ପଡ଼େ ନାହିଁ।"
+  LOTTERY_PRIZE:
+    en: "It says you won a prize but asks for money first. A real prize never needs payment in advance."
+    hi: "यह इनाम का दावा करता है लेकिन पहले पैसे मांगता है। असली इनाम के लिए कभी पहले पैसे नहीं देने पड़ते।"
+    hinglish: "Yeh inaam ka daava karta hai lekin pehle paise maangta hai. Asli inaam ke liye kabhi pehle paise nahi dene padte."
+    mr: "हा बक्षीस मिळाल्याचा दावा करतो पण आधी पैसे मागतो. खऱ्या बक्षिसासाठी आधी पैसे द्यावे लागत नाहीत."
+    gu: "આ ઇનામ મળ્યાનો દાવો કરે છે પણ પહેલાં પૈસા માંગે છે. સાચા ઇનામ માટે પહેલાં પૈસા આપવા પડતા નથી."
+    bn: "এটি পুরস্কার জেতার দাবি করে কিন্তু আগে টাকা চায়। আসল পুরস্কারের জন্য আগে টাকা দিতে হয় না।"
+    or: "ଏହା ପୁରସ୍କାର ଜିତିଥିବା ଦାବି କରେ କିନ୍ତୁ ପ୍ରଥମେ ଟଙ୍କା ମାଗେ। ପ୍ରକୃତ ପୁରସ୍କାର ପାଇଁ ପ୍ରଥମେ ଟଙ୍କା ଦେବାକୁ ପଡ଼େ ନାହିଁ।"
+  ELECTRICITY_DISCONNECT:
+    en: "It threatens to cut your electricity tonight. This is a common scam. The electricity company does not do this by making you call an unknown number."
+    hi: "यह आज ही बिजली कटने की धमकी देता है। यह आम ठगी है। बिजली कंपनी अनजान नंबर पर कॉल करवाकर ऐसा नहीं करती।"
+    hinglish: "Yeh aaj hi bijli katne ki dhamki deta hai. Yeh aam thagi hai. Bijli company anjaan number par call karwa kar aisa nahi karti."
+    mr: "हा आजच वीज कापण्याची धमकी देतो. ही नेहमीची फसवणूक आहे. वीज कंपनी अनोळखी नंबरवर फोन करायला लावून असे करत नाही."
+    gu: "આ આજે જ વીજળી કપાવાની ધમકી આપે છે. આ સામાન્ય છેતરપિંડી છે. વીજળી કંપની અજાણ્યા નંબર પર ફોન કરાવીને આવું કરતી નથી."
+    bn: "এটি আজই বিদ্যুৎ কেটে দেওয়ার হুমকি দিচ্ছে। এটি সাধারণ প্রতারণা। বিদ্যুৎ কোম্পানি অচেনা নম্বরে ফোন করিয়ে এমন করে না।"
+    or: "ଏହା ଆଜି ହିଁ ବିଦ୍ୟୁତ୍ କାଟିବାର ଧମକ ଦେଉଛି। ଏହା ସାଧାରଣ ଠକେଇ। ବିଦ୍ୟୁତ୍ କମ୍ପାନି ଅଜଣା ନମ୍ବରକୁ ଫୋନ୍ କରାଇ ଏପରି କରେ ନାହିଁ।"
+  COURIER_CUSTOMS:
+    en: "It says your parcel is stuck and asks you to pay a fee. Check directly with the courier company."
+    hi: "यह कहता है कि आपका पार्सल रुका है और फीस मांगता है। कूरियर कंपनी से सीधे पता करें।"
+    hinglish: "Yeh kehta hai ki aapka parcel ruka hai aur fee maangta hai. Courier company se seedha pata karein."
+    mr: "हा म्हणतो की तुमचे पार्सल अडकले आहे आणि शुल्क मागतो. कुरिअर कंपनीकडे थेट चौकशी करा."
+    gu: "આ કહે છે કે તમારું પાર્સલ અટકી ગયું છે અને ફી માંગે છે. કુરિયર કંપનીને સીધી પૂછો."
+    bn: "এটি বলছে আপনার পার্সেল আটকে আছে এবং ফি চাইছে। কুরিয়ার কোম্পানির কাছে সরাসরি খোঁজ নিন।"
+    or: "ଏହା କହୁଛି ଆପଣଙ୍କ ପାର୍ସଲ୍ ଅଟକି ଯାଇଛି ଏବଂ ଫି ମାଗୁଛି। କୁରିଅର୍ କମ୍ପାନିକୁ ସିଧାସଳଖ ପଚାରନ୍ତୁ।"
+  DIGITAL_ARREST:
+    en: "It claims police or an agency will arrest you and asks you to stay on the call. There is no 'digital arrest' in India."
+    hi: "यह कहता है कि पुलिस या कोई एजेंसी आपको गिरफ्तार करेगी और कॉल पर बने रहने को कहता है। भारत में 'डिजिटल अरेस्ट' जैसा कुछ नहीं होता।"
+    hinglish: "Yeh kehta hai ki police ya koi agency aapko arrest karegi aur call par bane rehne ko kehta hai. Bharat me 'digital arrest' jaisa kuch nahi hota."
+    mr: "हा म्हणतो की पोलीस किंवा एखादी संस्था तुम्हाला अटक करेल आणि फोनवर राहायला सांगतो. भारतात 'डिजिटल अरेस्ट' असा काही प्रकार नाही."
+    gu: "આ કહે છે કે પોલીસ કે કોઈ એજન્સી તમારી ધરપકડ કરશે અને ફોન પર રહેવા કહે છે. ભારતમાં 'ડિજિટલ એરેસ્ટ' જેવું કંઈ હોતું નથી."
+    bn: "এটি বলছে পুলিশ বা কোনো সংস্থা আপনাকে গ্রেফতার করবে এবং ফোনে থাকতে বলছে। ভারতে 'ডিজিটাল অ্যারেস্ট' বলে কিছু নেই।"
+    or: "ଏହା କହୁଛି ପୁଲିସ୍ କିମ୍ବା କୌଣସି ସଂସ୍ଥା ଆପଣଙ୍କୁ ଗିରଫ କରିବ ଏବଂ ଫୋନ୍‌ରେ ରହିବାକୁ କହୁଛି। ଭାରତରେ 'ଡିଜିଟାଲ୍ ଆରେଷ୍ଟ' ବୋଲି କିଛି ନାହିଁ।"
+  SIM_BLOCK:
+    en: "It threatens to block your SIM. Do not call the number or click the link in the message. Contact your mobile company directly."
+    hi: "यह आपका सिम बंद करने की धमकी देता है। संदेश के नंबर पर कॉल या लिंक पर क्लिक न करें; अपनी मोबाइल कंपनी से सीधे संपर्क करें।"
+    hinglish: "Yeh aapka SIM band karne ki dhamki deta hai. Message ke number par call ya link par click na karein; apni mobile company se seedha sampark karein."
+    mr: "हा तुमचे सिम बंद करण्याची धमकी देतो. संदेशातील नंबरवर फोन करू नका किंवा लिंकवर क्लिक करू नका; तुमच्या मोबाइल कंपनीशी थेट संपर्क साधा."
+    gu: "આ તમારું સિમ બંધ કરવાની ધમકી આપે છે. સંદેશમાંના નંબર પર ફોન ન કરો કે લિંક પર ક્લિક ન કરો; તમારી મોબાઇલ કંપનીનો સીધો સંપર્ક કરો."
+    bn: "এটি আপনার সিম বন্ধ করার হুমকি দিচ্ছে। বার্তার নম্বরে ফোন করবেন না বা লিংকে ক্লিক করবেন না; আপনার মোবাইল কোম্পানির সঙ্গে সরাসরি যোগাযোগ করুন।"
+    or: "ଏହା ଆପଣଙ୍କ ସିମ୍ ବନ୍ଦ କରିବାର ଧମକ ଦେଉଛି। ମେସେଜ୍‌ର ନମ୍ବରକୁ ଫୋନ୍ କରନ୍ତୁ ନାହିଁ କିମ୍ବା ଲିଙ୍କ୍‌ରେ କ୍ଲିକ୍ କରନ୍ତୁ ନାହିଁ; ଆପଣଙ୍କ ମୋବାଇଲ୍ କମ୍ପାନି ସହ ସିଧାସଳଖ ଯୋଗାଯୋଗ କରନ୍ତୁ।"
+  FAKE_CHALLAN:
+    en: "It talks about a traffic fine and asks you to install an app or pay online. Check challans only on the official government website."
+    hi: "यह ट्रैफिक चालान बताकर ऐप इंस्टॉल करने या ऑनलाइन भुगतान करने को कहता है। चालान सिर्फ सरकारी आधिकारिक वेबसाइट पर देखें।"
+    hinglish: "Yeh traffic challan bata kar app install karne ya online payment karne ko kehta hai. Challan sirf sarkari official website par dekhein."
+    mr: "हा ट्रॅफिक चलन सांगून अॅप इंस्टॉल करायला किंवा ऑनलाइन पैसे भरायला सांगतो. चलन फक्त अधिकृत सरकारी वेबसाइटवर तपासा."
+    gu: "આ ટ્રાફિક ચલણ કહીને એપ ઇન્સ્ટોલ કરવા કે ઓનલાઇન પૈસા ભરવા કહે છે. ચલણ ફક્ત સત્તાવાર સરકારી વેબસાઇટ પર તપાસો."
+    bn: "এটি ট্রাফিক চালানের কথা বলে অ্যাপ ইনস্টল করতে বা অনলাইনে টাকা দিতে বলছে। চালান শুধু সরকারি অফিসিয়াল ওয়েবসাইটে দেখুন।"
+    or: "ଏହା ଟ୍ରାଫିକ୍ ଚାଲାନ୍ କହି ଆପ୍ ଇନଷ୍ଟଲ୍ କରିବାକୁ କିମ୍ବା ଅନଲାଇନ୍‌ରେ ଟଙ୍କା ଦେବାକୁ କହୁଛି। ଚାଲାନ୍ କେବଳ ସରକାରୀ ଅଫିସିଆଲ୍ ୱେବସାଇଟ୍‌ରେ ଦେଖନ୍ତୁ।"
+  JOB_TASK_SCAM:
+    en: "It promises easy money for simple online tasks. Offers like this are used to take your money."
+    hi: "यह आसान ऑनलाइन काम से आसान कमाई का वादा करता है। ऐसे ऑफर लोगों से पैसे ऐंठने के लिए होते हैं।"
+    hinglish: "Yeh aasaan online kaam se aasaan kamai ka vaada karta hai. Aise offer logon se paise thagne ke liye hote hain."
+    mr: "हा सोप्या ऑनलाइन कामातून सहज कमाईचे आश्वासन देतो. अशा ऑफर लोकांचे पैसे लुबाडण्यासाठी असतात."
+    gu: "આ સરળ ઓનલાઇન કામથી સહેલી કમાણીનું વચન આપે છે. આવી ઓફર લોકો પાસેથી પૈસા પડાવવા માટે હોય છે."
+    bn: "এটি সহজ অনলাইন কাজে সহজ আয়ের প্রতিশ্রুতি দিচ্ছে। এমন অফার মানুষের টাকা হাতিয়ে নেওয়ার জন্য।"
+    or: "ଏହା ସହଜ ଅନଲାଇନ୍ କାମରୁ ସହଜ ରୋଜଗାରର ପ୍ରତିଶ୍ରୁତି ଦେଉଛି। ଏପରି ଅଫର୍ ଲୋକଙ୍କଠାରୁ ଟଙ୍କା ଠକିବା ପାଇଁ ହୋଇଥାଏ।"
+  LOAN_APP:
+    en: "It offers a fast loan through an app. Such apps can steal your phone data and harass you."
+    hi: "यह ऐप से तुरंत लोन देने की बात करता है। ऐसे ऐप फोन का डेटा चुरा सकते हैं और परेशान कर सकते हैं।"
+    hinglish: "Yeh app se turant loan dene ki baat karta hai. Aise app phone ka data chura sakte hain aur pareshan kar sakte hain."
+    mr: "हा अॅपद्वारे तात्काळ कर्ज देण्याचे सांगतो. असे अॅप फोनमधील माहिती चोरू शकतात आणि त्रास देऊ शकतात."
+    gu: "આ એપ દ્વારા તરત લોન આપવાની વાત કરે છે. આવી એપ ફોનનો ડેટા ચોરી શકે છે અને હેરાન કરી શકે છે."
+    bn: "এটি অ্যাপের মাধ্যমে তাৎক্ষণিক ঋণ দেওয়ার কথা বলছে। এমন অ্যাপ ফোনের তথ্য চুরি করতে এবং হয়রানি করতে পারে।"
+    or: "ଏହା ଆପ୍ ମାଧ୍ୟମରେ ତୁରନ୍ତ ଋଣ ଦେବାର କଥା କହୁଛି। ଏପରି ଆପ୍ ଫୋନ୍‌ର ତଥ୍ୟ ଚୋରି କରିପାରେ ଏବଂ ହଇରାଣ କରିପାରେ।"
+  GOVT_SCHEME:
+    en: "It claims a government benefit but asks you to install an app or give details. Check only on the official government website or office."
+    hi: "यह सरकारी योजना का लाभ बताकर ऐप इंस्टॉल करने या जानकारी देने को कहता है। सिर्फ आधिकारिक सरकारी वेबसाइट या दफ्तर में जांचें।"
+    hinglish: "Yeh sarkari yojana ka laabh bata kar app install karne ya jaankari dene ko kehta hai. Sirf official sarkari website ya daftar me jaanchein."
+    mr: "हा सरकारी योजनेचा लाभ सांगून अॅप इंस्टॉल करायला किंवा माहिती द्यायला सांगतो. फक्त अधिकृत सरकारी वेबसाइटवर किंवा कार्यालयात तपासा."
+    gu: "આ સરકારી યોજનાનો લાભ કહીને એપ ઇન્સ્ટોલ કરવા કે માહિતી આપવા કહે છે. ફક્ત સત્તાવાર સરકારી વેબસાઇટ કે કચેરીમાં તપાસો."
+    bn: "এটি সরকারি প্রকল্পের সুবিধার কথা বলে অ্যাপ ইনস্টল করতে বা তথ্য দিতে বলছে। শুধু সরকারি অফিসিয়াল ওয়েবসাইটে বা অফিসে যাচাই করুন।"
+    or: "ଏହା ସରକାରୀ ଯୋଜନାର ଲାଭ କହି ଆପ୍ ଇନଷ୍ଟଲ୍ କରିବାକୁ କିମ୍ବା ତଥ୍ୟ ଦେବାକୁ କହୁଛି। କେବଳ ସରକାରୀ ଅଫିସିଆଲ୍ ୱେବସାଇଟ୍ ବା କାର୍ଯ୍ୟାଳୟରେ ଯାଞ୍ଚ କରନ୍ତୁ।"
+  INVESTMENT_CRYPTO:
+    en: "It promises guaranteed high profit. No real investment can guarantee big profit."
+    hi: "यह पक्के और भारी मुनाफे का वादा करता है। कोई भी असली निवेश बड़े मुनाफे की गारंटी नहीं देता।"
+    hinglish: "Yeh pakke aur bhaari munafe ka vaada karta hai. Koi bhi asli nivesh bade munafe ki guarantee nahi deta."
+    mr: "हा खात्रीशीर आणि मोठ्या नफ्याचे आश्वासन देतो. कोणतीही खरी गुंतवणूक मोठ्या नफ्याची हमी देत नाही."
+    gu: "આ ખાતરીબંધ અને મોટા નફાનું વચન આપે છે. કોઈ પણ સાચું રોકાણ મોટા નફાની ખાતરી આપતું નથી."
+    bn: "এটি নিশ্চিত ও বিপুল লাভের প্রতিশ্রুতি দিচ্ছে। কোনো আসল বিনিয়োগ বড় লাভের নিশ্চয়তা দেয় না।"
+    or: "ଏହା ନିଶ୍ଚିତ ଓ ବିପୁଳ ଲାଭର ପ୍ରତିଶ୍ରୁତି ଦେଉଛି। କୌଣସି ପ୍ରକୃତ ନିବେଶ ବଡ଼ ଲାଭର ନିଶ୍ଚୟତା ଦିଏ ନାହିଁ।"
+  MALICIOUS_APK:
+    en: "It asks you to install an app from a link outside the Play Store. Such apps can steal your messages and money."
+    hi: "यह प्ले स्टोर के बाहर के लिंक से ऐप इंस्टॉल करने को कहता है। ऐसे ऐप आपके संदेश और पैसे चुरा सकते हैं।"
+    hinglish: "Yeh Play Store ke bahar ke link se app install karne ko kehta hai. Aise app aapke messages aur paise chura sakte hain."
+    mr: "हा प्ले स्टोअरच्या बाहेरील लिंकवरून अॅप इंस्टॉल करायला सांगतो. असे अॅप तुमचे संदेश आणि पैसे चोरू शकतात."
+    gu: "આ પ્લે સ્ટોરની બહારની લિંકથી એપ ઇન્સ્ટોલ કરવા કહે છે. આવી એપ તમારા સંદેશા અને પૈસા ચોરી શકે છે."
+    bn: "এটি প্লে স্টোরের বাইরের লিংক থেকে অ্যাপ ইনস্টল করতে বলছে। এমন অ্যাপ আপনার মেসেজ ও টাকা চুরি করতে পারে।"
+    or: "ଏହା ପ୍ଲେ ଷ୍ଟୋର୍ ବାହାରର ଲିଙ୍କ୍‌ରୁ ଆପ୍ ଇନଷ୍ଟଲ୍ କରିବାକୁ କହୁଛି। ଏପରି ଆପ୍ ଆପଣଙ୍କ ମେସେଜ୍ ଓ ଟଙ୍କା ଚୋରି କରିପାରେ।"
+  LOOKALIKE_DOMAIN:
+    en: "The link looks like a real website but is not. Fake sites copy real names to steal your details."
+    hi: "यह लिंक असली वेबसाइट जैसा दिखता है पर असली नहीं है। नकली साइटें असली नाम की नकल करके आपकी जानकारी चुराती हैं।"
+    hinglish: "Yeh link asli website jaisa dikhta hai par asli nahi hai. Nakli sites asli naam ki nakal karke aapki jaankari churati hain."
+    mr: "ही लिंक खऱ्या वेबसाइटसारखी दिसते पण खरी नाही. बनावट साइट खऱ्या नावाची नक्कल करून तुमची माहिती चोरतात."
+    gu: "આ લિંક સાચી વેબસાઇટ જેવી દેખાય છે પણ સાચી નથી. નકલી સાઇટ સાચા નામની નકલ કરીને તમારી માહિતી ચોરે છે."
+    bn: "এই লিংকটি আসল ওয়েবসাইটের মতো দেখায় কিন্তু আসল নয়। নকল সাইট আসল নামের নকল করে আপনার তথ্য চুরি করে।"
+    or: "ଏହି ଲିଙ୍କ୍ ପ୍ରକୃତ ୱେବସାଇଟ୍ ପରି ଦେଖାଯାଏ କିନ୍ତୁ ପ୍ରକୃତ ନୁହେଁ। ନକଲି ସାଇଟ୍ ପ୍ରକୃତ ନାମର ନକଲ କରି ଆପଣଙ୍କ ତଥ୍ୟ ଚୋରି କରେ।"
+  SHORTENED_URL:
+    en: "The link hides where it goes. You cannot tell if the place it leads to is safe."
+    hi: "यह लिंक छिपा देता है कि वह कहाँ ले जाएगा। आप जान नहीं सकते कि आगे की जगह सुरक्षित है या नहीं।"
+    hinglish: "Yeh link chhupa deta hai ki woh kahan le jayega. Aap jaan nahi sakte ki aage ki jagah surakshit hai ya nahi."
+    mr: "ही लिंक कुठे घेऊन जाईल ते लपवते. पुढचे ठिकाण सुरक्षित आहे की नाही हे तुम्हाला कळत नाही."
+    gu: "આ લિંક ક્યાં લઈ જશે તે છુપાવે છે. આગળની જગ્યા સુરક્ષિત છે કે નહીં તે તમે જાણી શકતા નથી."
+    bn: "এই লিংক কোথায় নিয়ে যাবে তা লুকিয়ে রাখে। পরের জায়গাটি নিরাপদ কি না তা আপনি জানতে পারেন না।"
+    or: "ଏହି ଲିଙ୍କ୍ କେଉଁଠାକୁ ନେବ ତାହା ଲୁଚାଏ। ପରବର୍ତ୍ତୀ ସ୍ଥାନ ସୁରକ୍ଷିତ କି ନାହିଁ ଆପଣ ଜାଣିପାରିବେ ନାହିଁ।"
+  SUSPICIOUS_TLD_OR_IP:
+    en: "The address of this link looks strange. Real banks and government sites do not use addresses like this."
+    hi: "इस लिंक का पता अजीब है। असली बैंक और सरकारी साइटें ऐसे पते इस्तेमाल नहीं करतीं।"
+    hinglish: "Is link ka pata ajeeb hai. Asli bank aur sarkari sites aise pate use nahi karti."
+    mr: "या लिंकचा पत्ता विचित्र आहे. खऱ्या बँका आणि सरकारी साइट असे पत्ते वापरत नाहीत."
+    gu: "આ લિંકનું સરનામું વિચિત્ર છે. સાચી બેંકો અને સરકારી સાઇટ આવા સરનામાં વાપરતી નથી."
+    bn: "এই লিংকের ঠিকানা অদ্ভুত। আসল ব্যাংক ও সরকারি সাইট এমন ঠিকানা ব্যবহার করে না।"
+    or: "ଏହି ଲିଙ୍କ୍‌ର ଠିକଣା ଅଦ୍ଭୁତ। ପ୍ରକୃତ ବ୍ୟାଙ୍କ ଓ ସରକାରୀ ସାଇଟ୍ ଏପରି ଠିକଣା ବ୍ୟବହାର କରନ୍ତି ନାହିଁ।"
+  UNKNOWN_SENDER_LINK:
+    en: "This is a link from a sender you do not know."
+    hi: "यह एक अनजान भेजने वाले का लिंक है।"
+    hinglish: "Yeh ek anjaan bhejne wale ka link hai."
+    mr: "ही अनोळखी पाठवणाऱ्याची लिंक आहे."
+    gu: "આ અજાણ્યા મોકલનારની લિંક છે."
+    bn: "এটি একজন অচেনা প্রেরকের লিংক।"
+    or: "ଏହା ଜଣେ ଅଜଣା ପଠାଇଥିବା ଲୋକର ଲିଙ୍କ୍।"
+  GENERIC_SUSPICIOUS:
+    en: "This message has some signs of a scam, so be careful."
+    hi: "इस संदेश में धोखाधड़ी के कुछ संकेत हैं, इसलिए सावधान रहें।"
+    hinglish: "Is message me dhokhadhadi ke kuch sanket hain, isliye savdhan rahein."
+    mr: "या संदेशात फसवणुकीची काही चिन्हे आहेत, म्हणून सावध राहा."
+    gu: "આ સંદેશમાં છેતરપિંડીના કેટલાક સંકેતો છે, તેથી સાવચેત રહો."
+    bn: "এই বার্তায় প্রতারণার কিছু লক্ষণ আছে, তাই সতর্ক থাকুন।"
+    or: "ଏହି ମେସେଜ୍‌ରେ ଠକେଇର କିଛି ଲକ୍ଷଣ ଅଛି, ତେଣୁ ସତର୍କ ରୁହନ୍ତୁ।"

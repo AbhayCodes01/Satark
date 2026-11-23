@@ -165,9 +165,16 @@ CERTAINTY = {
 }
 ACTION_HINT = {
     "en": re.compile(r"\b(do not|don't|never|call|check|verify|report|ignore|delete|avoid)\b", re.I),
-    "hi": re.compile(r"(न करें|न दें|न भेजें|कॉल करें|जांचें|बचें)"),
-    "hinglish": re.compile(r"\b(na karein|na dein|na bhejein|call karein|jaanchein|bachein)\b", re.I),
+    "hi": re.compile(r"(न करें|न दें|न भेजें|न बताएं|न बताएँ|साझा न करें|कॉल करें|जांचें|बचें|मत )"),
+    "hinglish": re.compile(r"\b(na karein|na dein|na bhejein|na batayein|na bataiye|share na karein|call karein|jaanchein|bachein|mat)\b", re.I),
 }
+
+
+ALLOWED_ACRONYMS = {"KYC", "OTP", "PIN", "UPI", "SMS", "APK", "ATM", "SIM", "URL", "CVV", "QR", "IP"}
+FOREIGN_OR_INVENTED_AUTHORITY = re.compile(
+    r"\b(united states|u\.s\.a?|usa|america|american|federal trade|fbi|interpol|consumer helpline)\b", re.I)
+INTERNAL_CODE = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]+)+\b")
+LIST_OR_PREAMBLE = re.compile(r"(^|\n)\s*\d+\.\s|^\s*here('s| is| are)\b", re.I)
 
 
 def verify_llama_output(text, evidence, lang):
@@ -178,8 +185,17 @@ def verify_llama_output(text, evidence, lang):
         return False, ["empty output"]
     if len(t) > 450:
         fails.append("too long")
-    if len(re.findall(r"[.!?।]", t)) > 5:
+    if len(re.findall(r"[.!?।]", t)) > 4:
         fails.append("too many sentences")
+    if LIST_OR_PREAMBLE.search(t):
+        fails.append("numbered list or preamble instead of plain sentences")
+    if INTERNAL_CODE.search(t):
+        fails.append("leaks internal reason codes")
+    unknown = sorted({a for a in re.findall(r"\b[A-Z]{2,7}\b", t) if a not in ALLOWED_ACRONYMS})
+    if unknown:
+        fails.append(f"unknown acronyms or labels (possible invented authority): {unknown[:4]}")
+    if FOREIGN_OR_INVENTED_AUTHORITY.search(t):
+        fails.append("names a foreign or invented authority")
     if lang == "en" and REASSURING["en"].search(re.sub(r"\b(not|isn't|never)\s+(be\s+)?(safe|genuine)\b", "", t, flags=re.I)):
         fails.append("reassuring wording")
     elif lang in ("hi", "hinglish") and REASSURING[lang].search(t):
@@ -258,8 +274,11 @@ def main():
             "reassuring": "This message is safe, you can click the link.",
             "invented number": "This may be a scam. Call 9876543210 now and do not click the link.",
             "certainty": "This is definitely a scam. Do not click.",
+            # Real replies captured from Llama 3.2 1B on the OnePlus 13R (ExecuTorch 1.5.1), 23 Nov 2026:
+            "phone_reply_1": ("Here are the explanations:\n1. Explain what looks suspicious. The domain \"sbi-kyc.xyz\" looks suspicious because it is a variation of the official domain \"sbi-kyc.com\", which is the official domain of the State Bank of India.\n2. Explain why it matters. This variation is suspicious because it is a domain that is not associated with the State Bank of India, which is a well-known and reputable financial institution in India.\n3. Give one safe action. One safe action is to report this domain to the relevant authorities, such as the Federal Trade Commission (FTC) in the United States, to report this type of scam."),
+            "phone_reply_2": ("Here's the explanation of the evidence and safe guidance:\n\nThe message looks suspicious because it contains several red flags, including a \"DANGEROUS\" risk band, \"KYC BANK BLOCK\" reason codes, \"LOOKALIKE_DOMAIN\" domain names, \"SUSPICIOUS TLD OR IP\" suspicious TLD or IP, and \"URGENCY\" reason codes. This suggests that the message may be a phishing attempt or a scam.\n\nThe possible danger is that the message may be a phishing attempt or a scam that could compromise the user's personal and financial information. This is especially true for KYC (Know Your Customer) banking, where the user's personal and financial information is being verified.\n\nOne practical safety action is to be extremely cautious when receiving unsolicited messages or calls from unknown numbers. If you receive a message that asks you to verify your account or provide personal information, it's best to err on the side of caution and not respond to the message. Instead, report the message to the relevant authorities, such as the National Consumer Helpline (NCH) in India, or the Federal Trade Commission (FTC) in the United States."),
         }
-        print("VERIFIER CHECK (same evidence, four candidate Llama answers):")
+        print("VERIFIER CHECK (same evidence, candidate Llama answers; the last two are REAL replies from the phone):")
         for name, txt in tests.items():
             r = final_explanation(ev, "en", llama_text=txt)
             print(f"  {name:16s} -> {r['source']}" + (f"  (rejected: {r['llama_rejected_because']})" if "llama_rejected_because" in r else ""))
